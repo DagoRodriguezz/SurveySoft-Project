@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Encuesta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            position: absolute;
+            bottom: 20px; /* Separación del borde inferior */
+            right: 20px; /* Separación del borde derecho */
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .btn-risk {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-risk:hover {
+            color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" action="{{ url_for('question.select_survey') }}">
+        <h1>Selecciona una Encuesta</h1>
+        {% for survey in surveys %}
+        <div>
+            <input type="radio" id="survey_{{ survey.id }}" name="survey_id" value="{{ survey.id }}" required>
+            <label for="survey_{{ survey.id }}">{{ survey.name }}</label>
+        </div>
+        {% endfor %}
+        <button type="submit">Seleccionar</button>
+    </form>
+
+</body>
+</html>

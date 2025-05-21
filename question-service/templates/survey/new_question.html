@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Nueva Pregunta{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="form-title">Agregar Nueva Pregunta</h2>
+    <form method="POST" class="styled-form">
+        <div class="form-group">
+            <label for="item_name">Nombre de la Pregunta:</label>
+            <input type="text" name="item_name" id="item_name" placeholder="Ingresa el nombre de la pregunta" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Descripción:</label>
+            <textarea name="description" id="description" rows="4" placeholder="Escribe una descripción para la pregunta" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="section_id">Sección:</label>
+            <select name="section_id" id="section_id" required>
+                {% for section in sections %}
+                    <option value="{{ section.id }}">{{ section.section_title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="button save-button">Guardar</button>
+            <a href="{{ url_for('question.administer_survey', survey_id=survey_id) }}" class="button cancel-button">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    /* Contenedor principal del formulario */
+    .form-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .styled-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #34495e;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: 'Arial', sans-serif;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        border-color: #2980b9;
+        box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+        outline: none;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 14px;
+        text-align: center;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .save-button {
+        background-color: #27ae60;
+    }
+
+    .save-button:hover {
+        background-color: #1e8449;
+    }
+
+    .cancel-button {
+        background-color: #e74c3c;
+    }
+
+    .cancel-button:hover {
+        background-color: #c0392b;
+    }
+
+    /* Adaptaciones para dispositivos pequeños */
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 15px;
+        }
+
+        .form-title {
+            font-size: 20px;
+        }
+
+        .button {
+            font-size: 12px;
+            padding: 8px 16px;
+        }
+    }
+</style>
+{% endblock %}

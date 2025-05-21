@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Administrar Encuesta{% endblock %}
+
+{% block content %}
+<div class="admin-survey-container">
+    <h2 class="survey-title">Administrar Encuesta: {{ survey.name }}</h2>
+    <p class="survey-info"><b>ID de la Encuesta:</b> {{ survey.id }}</p>
+    <p class="survey-info"><b>Descripción:</b> {{ survey.description }}</p>
+
+    <div class="question-actions">
+        <h3 class="questions-header">Preguntas</h3>
+        <table class="questions-table">
+            <thead>
+                <tr>
+                    <th>Sección</th>
+                    <th>Pregunta</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in questions %}
+                    <tr>
+                        <td>{{ question.section_title }}</td>
+                        <td>{{ question.item_name }}</td>
+                        <td>{{ question.description }}</td>
+                        <td>
+                            <a href="/question/surveys/{{ survey.id }}/questions/{{ question.id }}/edit" class="button edit-button">Editar</a>
+                            <form method="POST" action="/question/surveys/{{ survey.id }}/questions/{{ question.id }}/delete" style="display: inline;" onsubmit="return confirmDeletion();">
+                                <button type="submit" class="button delete-button">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/question/surveys/{{ survey.id }}/questions/new" class="button add-button">Agregar Pregunta</a>
+    </div>
+    <a href="/question/surveys" class="button back-button">Volver a la lista</a>
+</div>
+
+<style>
+    /* Contenedor principal */
+    .admin-survey-container {
+        max-width: 960px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Título */
+    .survey-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* Información de la encuesta */
+    .survey-info {
+        font-size: 16px;
+        color: #34495e;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    /* Encabezado de preguntas */
+    .questions-header {
+        font-size: 22px;
+        color: #2980b9;
+        margin-bottom: 15px;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    /* Tabla */
+    .questions-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .questions-table th, .questions-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .questions-table th {
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+    }
+
+    .questions-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Botones */
+    .button {
+        padding: 8px 16px;
+        font-size: 14px;
+        text-decoration: none;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .edit-button {
+        background-color: #3498db;
+    }
+
+    .edit-button:hover {
+        background-color: #217dbb;
+    }
+
+    .delete-button {
+        background-color: #e74c3c;
+    }
+
+    .delete-button:hover {
+        background-color: #c0392b;
+    }
+
+    .add-button {
+        background-color: #27ae60;
+        margin-top: 15px;
+        display: inline-block;
+    }
+
+    .add-button:hover {
+        background-color: #1e8449;
+    }
+
+    .back-button {
+        background-color: #34495e;
+        margin-top: 15px;
+        display: inline-block;
+    }
+
+    .back-button:hover {
+        background-color: #2c3e50;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .admin-survey-container {
+            padding: 15px;
+        }
+
+        .questions-table th, .questions-table td {
+            font-size: 12px;
+            padding: 8px;
+        }
+
+        .survey-title {
+            font-size: 24px;
+        }
+
+        .button {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+    }
+</style>
+
+<script>
+    function confirmDeletion() {
+        return confirm("¿Estás seguro de que deseas eliminar esta pregunta? Esta acción no se puede deshacer.");
+    }
+</script>
+{% endblock %}

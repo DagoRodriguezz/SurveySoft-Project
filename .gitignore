@@ -1,0 +1,27 @@
+# Entornos virtuales
+venv/
+*/venv/ # Para cubrir venv dentro de auth-service y question-service si los creaste ahí
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Bases de datos SQLite (si las usaras, aunque usas MySQL)
+*.sqlite3
+*.db
+
+# Archivos de configuración local (si tienes alguno que no deba subirse)
+# .env
+# config.local.py
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Archivos de IDEs
+.idea/
+.vscode/

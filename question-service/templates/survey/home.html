@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Encuestas{% endblock %}
+
+{% block content %}
+<div class="survey-container">
+    <h2 class="survey-title">Encuestas Disponibles</h2>
+
+    <ul class="survey-list">
+        {% for survey in surveys %}
+            <li class="survey-item">
+                <div class="survey-details">
+                    <span class="survey-name">{{ survey.name }}</span>
+                    <span class="survey-description">Accede para administrar esta encuesta     .</span>
+                </div>
+                <a href="/question/surveys/{{ survey.id }}/administer" class="button">Administrar</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<style>
+    /* Estilo del contenedor principal */
+    .survey-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* Título estilizado */
+    .survey-title {
+        text-align: center;
+        color: #2c3e50;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Lista de encuestas */
+    .survey-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Elemento de encuesta */
+    .survey-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f9fa;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .survey-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Detalles de cada encuesta */
+    .survey-details {
+        flex: 1;
+    }
+
+    .survey-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    .survey-description {
+        display: block;
+        font-size: 14px;
+        color: #7f8c8d;
+        margin-top: 5px;
+    }
+
+    /* Botón estilizado */
+    .button {
+        padding: 10px 20px;
+        text-decoration: none;
+        background: linear-gradient(45deg, #3498db, #2ecc71);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .button:hover {
+        background: linear-gradient(45deg, #2980b9, #27ae60);
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .button:active {
+        transform: scale(0.95);
+        background: linear-gradient(45deg, #1c598a, #1e8449);
+    }
+</style>
+{% endblock %}

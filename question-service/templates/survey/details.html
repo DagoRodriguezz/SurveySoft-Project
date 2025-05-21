@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de la Encuesta</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .back-button {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            padding: 10px 20px;
+            color: white;
+            background-color: #007bff;
+            border-radius: 4px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Detalles de la Encuesta</h1>
+    </header>
+    <main>
+        <h2>{{ details.survey_name }}</h2>
+        <p><strong>Puntaje Total:</strong> {{ details.total_score }}</p>
+        <p><strong>Porcentaje:</strong> {{ details.percentage }}%</p>
+        <p><strong>Resultado:</strong> {{ details.overall_result }}</p>
+        <p><strong>Fecha de Realización:</strong> {{ details.completed_at }}</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Pregunta</th>
+                    <th>Puntaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in details.items %}
+                <tr>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item.score }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/history/users/{{ user_id }}/history" class="back-button">Volver al Historial</a>
+    </main>
+</body>
+</html>
